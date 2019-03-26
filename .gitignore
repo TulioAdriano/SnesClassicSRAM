@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/SnesClassicSram/v15
+/SnesClassicSram/bin/Debug
+/SnesClassicSram/obj/Debug

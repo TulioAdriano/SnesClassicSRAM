@@ -30,6 +30,17 @@ namespace SnesClassicSram
                 return;
             }
 
+            if (!(new FileInfo(args[0]).Length.Equals(8192)))
+            {
+                Console.Write($"Warning: Uncommon SRAM size. Do you wish to proceed (Y/N)? ");
+                if (!Console.ReadKey().KeyChar.ToString().ToUpper().Equals("Y"))
+                {
+                    Console.WriteLine("\r\n");
+                    return;
+                } 
+
+                Console.WriteLine();
+            }
 
             SHA1Managed sHA1Managed = new SHA1Managed();
             byte[] hash = sHA1Managed.ComputeHash(File.ReadAllBytes(args[0]));
