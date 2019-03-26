@@ -30,14 +30,16 @@ namespace SnesClassicSram
                 return;
             }
 
-            if (!(new FileInfo(args[0]).Length.Equals(8192)))
+            //test if 
+            long fileLength = new FileInfo(args[0]).Length;
+            if (!IsPowerOf2(fileLength))
             {
                 Console.Write($"Warning: Uncommon SRAM size. Do you wish to proceed (Y/N)? ");
                 if (!Console.ReadKey().KeyChar.ToString().ToUpper().Equals("Y"))
                 {
                     Console.WriteLine("\r\n");
                     return;
-                } 
+                }
 
                 Console.WriteLine();
             }
@@ -53,6 +55,11 @@ namespace SnesClassicSram
             File.WriteAllBytes("cartridge.sram.hash", hash);
             Console.WriteLine($"Success. SRAM Hash: {BitConverter.ToString(hash).Replace("-", "")}.");
             Console.WriteLine();
+        }
+
+        private static bool IsPowerOf2(long fileLength)
+        {
+            return (fileLength & (fileLength - 1)).Equals(0);
         }
     }
 }
